@@ -18,6 +18,7 @@
 </template>
 
 <script>
+// components
 import navegation from '~/components/layout/navegation'
 import footerBase from '~/components/layout/footer'
 import titleBase from '~/components/layout/title'
