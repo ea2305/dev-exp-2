@@ -35,5 +35,6 @@ export default {
 .vpage {
   min-height: 100vh;
   height: auto;
+  padding-bottom: 3em;
 }
 </style>

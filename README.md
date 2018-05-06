@@ -14,5 +14,5 @@ Instal packages
 npm install
 ```
 
-## MIT LICENSE
- Available with MIT License.
+### License
+Available with MIT License.
