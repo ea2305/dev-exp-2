@@ -15,12 +15,6 @@ export const state = () => ({
     { title: 'Project', url: '/projects' },
     { title: 'Sprint', url: '/sprints' }
   ],
-  projects: {
-    pagination: {
-      total: 0,
-      current: 0
-    }
-  },
   page: {
     title: 'No title',
     description: 'No description'
@@ -43,13 +37,5 @@ export const mutations = {
    */
   setPageDescription (state, description) {
     state.page.description = description
-  },
-  /**
-   * 
-   * @param {Object} state
-   * @param {Object} pagination : total and current page application
-   */
-  setPaginationProjects (state, pagination) {
-    state.projects.pagination = pagination
   }
 }

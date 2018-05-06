@@ -17,25 +17,32 @@
         </div>
 
         <!--Grid services-->
-        <div class="column is-3" v-for="project of projects" :key="project.title">
-          <card-project 
-            :title="project.title"
-            :description="project.description"
-            :date="project.date"
-            :urlView="project.urlView"
-            :urlEdit="project.urlEdit"
-            :urlDelete="project.urlDelete"/>
+        <div class="columns is-multiline">
+          <div class="column is-3" v-for="project of projects" :key="project.title">
+            <card-project 
+              :title="project.title"
+              :description="project.description"
+              :date="project.date"
+              :urlView="project.urlView"
+              :urlEdit="project.urlEdit"
+              :urlDelete="project.urlDelete"/>
+          </div>
         </div>
       </div>
-       <b-pagination
-            :total="$store.state.projects.pagination.total"
-            :current.sync="$store.state.projects.pagination.current"
+
+      <!--pagination-->
+      <div class="column is-12">
+        <b-pagination
+            :total="totalPagination"
+            :current.sync="currentPage"
             :order="'is-centered'"
             :size="'is-small'"
-            :simple="true"
+            :simple="false"
             :rounded="true"
-            :per-page="8">
+            :per-page="8"
+            @change="updatePagination">
         </b-pagination>
+      </div>
     </section>
   </div>
 </template>
@@ -49,6 +56,8 @@ export default {
    * Data app
    */
   data: () => ({
+    currentPage: 1,
+    totalPagination: 0,
     projects: []
   }),
   /**
@@ -72,6 +81,7 @@ export default {
       const projects = [0,1,2,3,4,5,6,7,8,9]
       // asign values
       this.projects = projects.map(i => ({
+        id: i,
         title: `Project ${i}`,
         description: `Description project ${i}`,
         date: `01-01-201${i}`,
@@ -81,7 +91,14 @@ export default {
       }))
 
       // setup pagination
-      this.$store.commit('setPaginationProjects', { total: projects.length, current: 1 })
+      this.totalPagination = projects.length
+      this.currentPage = 1
+    },
+    /**
+     * @param {Number} page : current pagination update
+     */
+    updatePagination (page) {
+      alert(page)
     }
   },
   components: {
