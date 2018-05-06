@@ -1,4 +1,4 @@
-# dev^2
+# Dev^2
 
 ### What's dev^2
 
