@@ -18,6 +18,7 @@
 
         <!--Grid services-->
         <div class="columns is-multiline vwidth">
+          <b-loading :is-full-page="true" :active.sync="isLoading" :canCancel="false"></b-loading>
           <div class="column is-3" v-for="project of projects" :key="project.title">
             <card-project 
               :title="project.title"
@@ -62,7 +63,8 @@ export default {
   data: () => ({
     currentPage: 1,
     totalPagination: 0,
-    projects: []
+    projects: [],
+    isLoading: true
   }),
   /**
    * Ignite component
@@ -83,9 +85,9 @@ export default {
     async fetchProjects () {
       // get data from firebase
       let projectRef = this.$firebase.database().ref('project');
+
       let vm = this
       projectRef.on('value', (snapshot) => {
-        console.log(snapshot.val(), 'DATA VALUES')
         // iteration
         let projects = []
         let object = snapshot.val()
@@ -106,6 +108,7 @@ export default {
         }
         // state state
         this.projects = projects
+        this.isLoading = false
         // setup pagination
         this.totalPagination = this.projects.length
         this.currentPage = 1
