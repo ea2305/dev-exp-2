@@ -79,10 +79,10 @@ export default {
 
       // persist data
       try {
-        let id = `project-${moment().unix()}`
+        let id = moment().unix()
         let date = moment(this.date).format('YYYY-MM-DD') // moment format
         // insert
-        this.$firebase.database().ref(`project/${id}`).set({
+        this.$firebase.database().ref(`${proccess.env.APP_NAME}/project/${id}`).set({
           id,
           title: this.title,
           description: this.description,
