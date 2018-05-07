@@ -37,4 +37,8 @@ export default {
   height: auto;
   padding-bottom: 3em;
 }
+
+.vwidth {
+  min-width: 100%;;
+}
 </style>

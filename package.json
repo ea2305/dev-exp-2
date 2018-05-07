@@ -9,6 +9,8 @@
     "@nuxtjs/pwa": "latest",
     "@rafamaciel/firebase": "1.0.0",
     "firebase": "4.13.1",
+    "indicative": "5.0.5",
+    "moment": "2.22.1",
     "nuxt": "latest",
     "nuxt-buefy": "0.0.4"
   },

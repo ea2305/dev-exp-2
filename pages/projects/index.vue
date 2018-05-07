@@ -6,9 +6,9 @@
       <div class="columns is-multiline">
         <!--action panels-->
         <article class="column is-12">
-          <button class="button is-rounded is-info">
+          <nuxt-link to="/projects/make" class="button is-rounded is-info">
             Create project
-          </button>
+          </nuxt-link>
         </article>
 
         <!--title-->
@@ -17,7 +17,7 @@
         </div>
 
         <!--Grid services-->
-        <div class="columns is-multiline">
+        <div class="columns is-multiline vwidth">
           <div class="column is-3" v-for="project of projects" :key="project.title">
             <card-project 
               :title="project.title"
@@ -32,7 +32,8 @@
 
       <!--pagination-->
       <div class="column is-12">
-        <b-pagination
+        <no-ssr>
+          <b-pagination
             :total="totalPagination"
             :current.sync="currentPage"
             :order="'is-centered'"
@@ -42,12 +43,15 @@
             :per-page="8"
             @change="updatePagination">
         </b-pagination>
+        </no-ssr>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+// tootls
+import moment from 'moment'
 // components
 import cardProject from '~/components/cards/project'
 
@@ -77,22 +81,35 @@ export default {
       this.$store.commit('setPageDescription', 'Manage projects')
     },
     async fetchProjects () {
-      // axios get ---
-      const projects = [0,1,2,3,4,5,6,7,8,9]
-      // asign values
-      this.projects = projects.map(i => ({
-        id: i,
-        title: `Project ${i}`,
-        description: `Description project ${i}`,
-        date: `01-01-201${i}`,
-        urlView: `/projects/${i}`,
-        urlEdit: `/projects/${i}/edit`,
-        urlDelete: `/projects/${i}/delete`
-      }))
-
-      // setup pagination
-      this.totalPagination = projects.length
-      this.currentPage = 1
+      // get data from firebase
+      let projectRef = this.$firebase.database().ref('project');
+      let vm = this
+      projectRef.on('value', (snapshot) => {
+        console.log(snapshot.val(), 'DATA VALUES')
+        // iteration
+        let projects = []
+        let object = snapshot.val()
+        // data to array
+        for (const key in object) {
+          if (object.hasOwnProperty(key)) {
+            const element = object[key];
+            projects.push({
+              id: element.id,
+              title: element.title,
+              description: element.description,
+              date: moment(element.date).format('MMM DD YYYY'),
+              urlView: `/projects/${element.id}`,
+              urlEdit: `/projects/${element.id}/edit`,
+              urlDelete: `/projects/${element.id}/delete`
+            })
+          }
+        }
+        // state state
+        this.projects = projects
+        // setup pagination
+        this.totalPagination = this.projects.length
+        this.currentPage = 1
+      });
     },
     /**
      * @param {Number} page : current pagination update
