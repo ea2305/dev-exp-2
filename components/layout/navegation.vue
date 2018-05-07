@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar is-black" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
+    <div class="navbar-brand container">
 
       <nuxt-link 
         class="navbar-item" 
@@ -9,7 +9,7 @@
         :key="section.url">
 
         <b-icon v-if="section.icon" :icon="section.icon.name" :size="section.icon.class"></b-icon>
-        {{ section.title }}
+        <span style="padding: 0em .3em">{{ section.title }}</span>
       </nuxt-link>
 
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
