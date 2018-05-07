@@ -18,6 +18,7 @@
 
         <!--Grid services-->
         <div class="columns is-multiline vwidth">
+          <!-- loader -->
           <b-loading :is-full-page="true" :active.sync="isLoading" :canCancel="false"></b-loading>
           <div class="column is-3" v-for="project of projects" :key="project.title">
             <card-project 

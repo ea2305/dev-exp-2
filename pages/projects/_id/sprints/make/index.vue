@@ -21,8 +21,8 @@ export default {
      * Set title and description
      */
     setPage () {
-      this.$store.commit('setPageTitle', 'Sprint')
-      this.$store.commit('setPageDescription', 'Base route sprint definition')
+      this.$store.commit('setPageTitle', 'Add Sprint')
+      this.$store.commit('setPageDescription', "Let's do it")
     }
   }
 }

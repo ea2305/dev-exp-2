@@ -8,12 +8,11 @@ export const state = () => ({
       title: 'Dashboard', 
       url: '/', 
       icon: {
-        name: 'view-dashboard',
-        class: 'is-large'
+        name: 'monitor',
+        class: 'is-medium'
       }
     },
-    { title: 'Project', url: '/projects' },
-    { title: 'Sprint', url: '/sprints' }
+    { title: 'Project', url: '/projects' }
   ],
   page: {
     title: 'No title',
