@@ -7,7 +7,7 @@ Help your self to create, update and store projects workflow easy.
 Handle sprint and see the team work performance.
 Assign times, see metrics and improve the development process of your team.
 
-## Instalation
+## Installation
 Instal packages 
 
 ```js
