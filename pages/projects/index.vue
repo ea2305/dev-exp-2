@@ -84,7 +84,7 @@ export default {
     },
     async fetchProjects () {
       // get data from firebase
-      let projectRef = this.$firebase.database().ref(`${proccess.env.APP_NAME}/project`);
+      let projectRef = this.$firebase.database().ref(`${process.env.APP_NAME}/project`);
 
       let vm = this
       projectRef.on('value', (snapshot) => {
