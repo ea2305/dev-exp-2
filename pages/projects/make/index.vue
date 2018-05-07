@@ -13,11 +13,11 @@
         <div class="column is-8 is-offset-2">
           
           <b-field label="Project name">
-            <b-input maxlength="300" v-model="title" placeholder="New project"></b-input>
+            <b-input maxlength="200" v-model="title" placeholder="New project"></b-input>
           </b-field>
 
           <b-field label="Description">
-            <b-input v-model="description" placeholder="Awesome description"></b-input>
+            <b-input maxlength="500" v-model="description" placeholder="Awesome description"></b-input>
           </b-field>
 
           <b-field label="Project start on">
@@ -31,7 +31,7 @@
           <div class="is-flex">
             <button class="button is-rounded is-success" style="margin-right: 1em;"
               @click="create">Crear</button>
-            <nuxt-link to="/projects" class="button is-rounded is-danger">Cancelar</nuxt-link>
+            <nuxt-link to="/projects" class="button is-rounded is-danger">Cancel</nuxt-link>
           </div>
 
         </div>
