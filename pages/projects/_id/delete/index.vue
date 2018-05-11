@@ -40,7 +40,7 @@ export default {
     async fetchProject () {
       // get id
       let id = this.$route.params.id
-      let snapshot = await this.$firebase.database().ref(`${process.env.APP_NAME}/project/${id}`).once('value')
+      let snapshot = await this.$firebase.database().ref(`${process.env.APP_NAME}/project/${id}/data`).once('value')
       let data = snapshot.val()
       // set pagination
       this.title = data.title

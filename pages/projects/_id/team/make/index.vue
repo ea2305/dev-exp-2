@@ -13,13 +13,16 @@
             <b-input maxlength="200" v-model="nickname" placeholder="New sprint"></b-input>
           </b-field>
           <hr>
-          <b-field label="Trello nickname">
+          <b-field label="Trello nickname*">
             <b-input maxlength="200" v-model="trello_nickname" placeholder="@nick"></b-input>
           </b-field>
-          <b-field label="Wakatime nickname">
+          <b-field label="Wakatime nickname*">
             <b-input maxlength="200" v-model="wakatime_nickname" placeholder="@nick"></b-input>
           </b-field>
-          <b-field label="Gitlab nickname">
+          <b-field label="Wakatime ApiKey*">
+            <b-input maxlength="200" v-model="wakatime_apikey" placeholder="0xx0-0xx0"></b-input>
+          </b-field>
+          <b-field label="Gitlab nickname*">
             <b-input maxlength="200" v-model="gitlab_nickname" placeholder="@nick"></b-input>
           </b-field>
         
@@ -46,7 +49,8 @@ export default {
     nickname: '',
     trello_nickname: '',
     wakatime_nickname: '',
-    gitlab_nickname: ''
+    gitlab_nickname: '',
+    wakatime_apikey: ''
   }),
   /**
    * Ignite component
@@ -70,13 +74,15 @@ export default {
         trello_nickname: 'required|min:3|max:200',
         wakatime_nickname: 'required|min:3|max:200',
         gitlab_nickname: 'required|min:3|max:200',
+        wakatime_apikey: 'required|min:3|max:200'
       }
 
       const data = {
         nickname: this.nickname,
         trello_nickname: this.trello_nickname,
         wakatime_nickname: this.wakatime_nickname,
-        gitlab_nickname: this.gitlab_nickname
+        gitlab_nickname: this.gitlab_nickname,
+        wakatime_apikey: this.wakatime_apikey
       }
       
       try {

@@ -105,11 +105,13 @@ export default {
         let id = moment().unix()
         let date = moment(this.date).format('YYYY-MM-DD') // moment format
         // insert
-        this.$firebase.database().ref(`${process.env.APP_NAME}/project/${id}`).set({
+        this.$firebase.database().ref(`${process.env.APP_NAME}/project/${id}/data`).set({
           id,
           title: this.title,
           description: this.description,
-          date
+          date,
+          sprints: null,
+          team: null
         })
         // notify
         this.$toast.open({

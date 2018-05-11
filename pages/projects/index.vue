@@ -98,13 +98,13 @@ export default {
           if (object.hasOwnProperty(key)) {
             const element = object[key];
             projects.push({
-              id: element.id,
-              title: element.title,
-              description: element.description,
-              date: moment(element.date).format('MMM DD YYYY'),
-              urlView: `/projects/${element.id}`,
-              urlEdit: `/projects/${element.id}/edit`,
-              urlDelete: `/projects/${element.id}/delete`
+              id: element.data.id,
+              title: element.data.title,
+              description: element.data.description,
+              date: moment(element.data.date).format('MMM DD YYYY'),
+              urlView: `/projects/${element.data.id}`,
+              urlEdit: `/projects/${element.data.id}/edit`,
+              urlDelete: `/projects/${element.data.id}/delete`
             })
           }
         }

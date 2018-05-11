@@ -48,6 +48,8 @@ export default {
     title: '',
     description: '',
     date: null,
+    sprints: null,
+    team: null,
     isLoading: true
   }),
   /**
@@ -72,11 +74,13 @@ export default {
     async fetchProject () {
       // get id
       let id = this.$route.params.id
-      let snapshot = await this.$firebase.database().ref(`${process.env.APP_NAME}/project/${id}`).once('value')
+      let snapshot = await this.$firebase.database().ref(`${process.env.APP_NAME}/project/${id}/data`).once('value')
       let data = snapshot.val()
       // set pagination
       this.title = data.title
       this.description = data.description
+      this.sprints = data.sprints
+      this.team = data.team
       this.date = moment(data.date).toDate()
       this.isLoading = false
     },
@@ -88,12 +92,13 @@ export default {
         let date = moment(this.date).format('YYYY-MM-DD') // moment format
         // prepare update
         var updates = {};
-        updates[`${process.env.APP_NAME}/project/${id}`] = {
+        updates[`${process.env.APP_NAME}/project/${id}/data`] = {
           id,
           title: this.title,
           description: this.description,
+          description: this.description,
           date
-        };
+        }
 
         // insert
         this.$firebase.database().ref().update(updates)

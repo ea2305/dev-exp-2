@@ -135,8 +135,8 @@ export default {
         let object = snapshot.val()
 
         // basic description
-        this.title = object.title
-        this.description = object.description
+        this.title = object.data.title
+        this.description = object.data.description
         // setup title
         this.setPage()
 
