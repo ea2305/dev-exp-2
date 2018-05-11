@@ -30,7 +30,7 @@
 
           <div class="is-flex">
             <button class="button is-rounded is-success" style="margin-right: 1em;"
-              @click="create">Crear</button>
+              @click="create">Create</button>
             <nuxt-link to="/projects" class="button is-rounded is-danger">Cancel</nuxt-link>
           </div>
 

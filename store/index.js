@@ -3,15 +3,16 @@
 
 export const state = () => ({
   // page title and description configuration
+  /**{ 
+    title: 'Dashboard', 
+    url: '/', 
+    icon: {
+      name: 'monitor',
+      class: 'is-medium'
+    }
+  },*/
   sections: [
-    { 
-      title: 'Dashboard', 
-      url: '/', 
-      icon: {
-        name: 'monitor',
-        class: 'is-medium'
-      }
-    },
+    { title: 'Home', url: '/' },
     { title: 'Project', url: '/projects' }
   ],
   page: {

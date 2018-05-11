@@ -5,6 +5,7 @@
   "author": "Elihu Cruz <ea230596@gmail.com>",
   "private": true,
   "dependencies": {
+    "@nuxtjs/axios": "5.3.1",
     "@nuxtjs/dotenv": "1.1.1",
     "@nuxtjs/pwa": "latest",
     "@rafamaciel/firebase": "1.0.0",

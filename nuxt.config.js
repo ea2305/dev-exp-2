@@ -38,6 +38,7 @@ module.exports = {
     '@nuxtjs/pwa',
     'nuxt-buefy',
     '@nuxtjs/dotenv',
+    '@nuxtjs/axios',
     {
       src: '@rafamaciel/firebase',
       options: {
