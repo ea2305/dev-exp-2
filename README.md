@@ -1,7 +1,7 @@
 
 <p align="center">
   <br>
-    <img height="200" src="https://image.ibb.co/dKzp3y/Logo.png" />
+    <img height="200" src="https://image.ibb.co/nJtr0d/icon.png" />
   <br>
   <br>
   <br>
