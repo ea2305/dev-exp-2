@@ -2,6 +2,10 @@
   <nav class="navbar is-black" role="navigation" aria-label="main navigation">
     <div class="navbar-brand container">
 
+      <nuxt-link to="/" class="navbar-item">
+        <img src="/icon.png" alt="dev2 icon">
+      </nuxt-link>
+
       <nuxt-link 
         class="navbar-item" 
         :to="section.url" 
