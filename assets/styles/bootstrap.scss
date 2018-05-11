@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300|Raleway:500');
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+// Titulos y cabeceras
+$family-title: 'Quicksand', sans-serif;
+
+// Fondo base
+$family-serif: 'Raleway', sans-serif;
+
+// Configuración de titulos
+@for $i from 1 through 5 {
+  div.hero,h#{$i} {
+    font-family: $family-title !important;
+  }
+  h#{$i} {
+    font-family: $family-title !important;
+  }
+}
+
+span,div,p,strong,button,input,textarea,i {
+  font-family: $family-serif;
+}
+
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";

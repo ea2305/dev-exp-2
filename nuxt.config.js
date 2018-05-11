@@ -18,6 +18,9 @@ module.exports = {
       }
     ]
   },
+  css: [
+    '@/assets/styles/bootstrap.scss',
+  ],
   /*
   ** Customize the progress-bar color
   */
