@@ -80,6 +80,7 @@ export default {
       this.$store.commit('setPageTitle', 'Add Sprint')
       this.$store.commit('setPageDescription', "Let's do it")
     },
+    
     async extract () {
       if (!this.trelloId) {
         this.$toast.open({

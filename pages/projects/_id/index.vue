@@ -7,6 +7,9 @@
           <nuxt-link :to="`/projects/${$route.params.id}/sprints/make`" class="button is-rounded is-info">
             Add Sprint
           </nuxt-link>
+          <nuxt-link :to="`/projects/${$route.params.id}/team/make`" class="button is-rounded is-info" style="margin-left: 1em;">
+            Add Team member
+          </nuxt-link>
         </div>
         <div class="column is-12">
           <h1 class="is-size-3">Sprints</h1>
