@@ -71,11 +71,34 @@ export default {
     /**
      * Create project
      */
-    create () {
+    async create () {
       // validate fields
-      let isValid = this.validateFields()
-      if (!isValid)
+      const rules = {
+        title: 'required|min:3|max:200',
+        description: 'required|min:6|max:500',
+        date: 'required|date'
+      }
+
+      const data = {
+        title: this.title,
+        description: this.description,
+        date: this.date
+      }
+      
+      try {
+        let validation = await validate(data, rules)
+      } catch (error) {
+        console.log(error, 'err')
+        error.forEach(err => {
+          this.$toast.open({
+            duration: 3000,
+            message: err.message,
+            position: 'is-bottom',
+            type: 'is-danger'
+          })
+        });
         return
+      }
 
       // persist data
       try {
@@ -104,38 +127,6 @@ export default {
           position: 'is-bottom',
           type: 'is-danger'
         })
-      }
-    },
-    /**
-     * validation form
-     */
-    async validateFields () {
-      const rules = {
-        title: 'required|min:3|max:200',
-        description: 'required|min:6|max:500',
-        date: 'required|date'
-      }
-
-      const data = {
-        title: this.title,
-        description: this.description,
-        date: this.date
-      }
-      
-      try {
-        let validation = await validate(data, rules)
-        return true
-      } catch (error) {
-        console.log(error, 'err')
-        error.forEach(err => {
-          this.$toast.open({
-            duration: 3000,
-            message: err.message,
-            position: 'is-bottom',
-            type: 'is-danger'
-          })
-        });
-        return false
       }
     }
   }
