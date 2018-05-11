@@ -114,7 +114,7 @@ export default {
         // setup pagination
         this.totalPagination = this.projects.length
         this.currentPage = 1
-      });
+      })
     },
     /**
      * @param {Number} page : current pagination update
