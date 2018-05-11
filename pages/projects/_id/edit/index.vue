@@ -79,8 +79,6 @@ export default {
       // set pagination
       this.title = data.title
       this.description = data.description
-      this.sprints = data.sprints
-      this.team = data.team
       this.date = moment(data.date).toDate()
       this.isLoading = false
     },
@@ -95,7 +93,6 @@ export default {
         updates[`${process.env.APP_NAME}/project/${id}/data`] = {
           id,
           title: this.title,
-          description: this.description,
           description: this.description,
           date
         }

@@ -152,9 +152,9 @@ export default {
               description: element.description,
               title: element.title,
               trelloId: element.trelloId,
-              urlView: `/project/${id}/sprints/${element.trelloId}`,
-              urlEdit: `/project/${id}/sprints/${element.trelloId}/edit`,
-              urlDelete: `/project/${id}/sprints/${element.trelloId}/delete`
+              urlView: `/projects/${id}/sprints/${element.trelloId}`,
+              urlEdit: `/projects/${id}/sprints/${element.trelloId}/edit`,
+              urlDelete: `/projects/${id}/sprints/${element.trelloId}/delete`
             })
           }
         }
@@ -178,9 +178,9 @@ export default {
               nickname: element.nickname,
               trello_nickname: element.trello_nickname,
               wakatime_nickname: element.wakatime_nickname,
-              urlView: `/project/${id}/team/${element.trello_nickname}`,
-              urlEdit: `/project/${id}/team/${element.trello_nickname}/edit`,
-              urlDelete: `/project/${id}/team/${element.trello_nickname}/delete`
+              urlView: `/projects/${id}/team/${element.trello_nickname}`,
+              urlEdit: `/projects/${id}/team/${element.trello_nickname}/edit`,
+              urlDelete: `/projects/${id}/team/${element.trello_nickname}/delete`
             })
           }
         }
