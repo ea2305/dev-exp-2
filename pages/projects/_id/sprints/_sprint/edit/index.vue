@@ -137,7 +137,7 @@ export default {
       this.trelloId = data.trelloId
       this.isLoading = false
     },
-    update () {
+    async update () {
       // get id
       const id = this.$route.params.id
       const sprintId = this.$route.params.sprint
@@ -146,7 +146,7 @@ export default {
         let date = moment(this.date).format('YYYY-MM-DD') // moment format
         // prepare update
         var updates = {};
-        updates[`${process.env.APP_NAME}/project/${id}/sprints/${sprintId}`] = {
+        updates[`${process.env.APP_NAME}/project/${id}/sprints/${this.trelloId}`] = {
           trelloId: this.trelloId,
           title: this.title,
           description: this.description,
@@ -155,6 +155,7 @@ export default {
 
         // insert
         this.$firebase.database().ref().update(updates)
+        let result = await this.$firebase.database().ref(`${process.env.APP_NAME}/project/${id}/sprints/${sprintId}`).remove()
         // notify
         this.$toast.open({
           duration: 3000,

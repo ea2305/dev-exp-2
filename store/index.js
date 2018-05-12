@@ -13,7 +13,7 @@ export const state = () => ({
   },*/
   sections: [
     { title: 'Home', url: '/' },
-    { title: 'Project', url: '/projects' },
+    { title: 'Projects', url: '/projects' },
     { title: 'Configuration', url: '/config' }
   ],
   page: {
