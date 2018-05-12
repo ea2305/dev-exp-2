@@ -2,9 +2,11 @@
   <div class="vpage">
     <section class="container">
       <div class="columns is-multiline">
+        
         <div class="column is-12">
           <h2 class="is-size-3">Sprint: Burndown chart</h2>
         </div>
+
         <div class="column is-12">
           <div class="is-flex" style="justify-content: center;">
             <line-chart v-if="!isLoading" 
@@ -23,7 +25,15 @@
               :height="350"/>
           </div>
         </div>
+
+        <div class="columns is-multiline">
+          <div class="column is-3" v-for="storeElement of storeElements" :key="storeElement.id">
+
+          </div>
+        </div>
+
       </div>
+
       <!--loader-->
       <b-loading :is-full-page="true" :active.sync="isLoading" :canCancel="false"></b-loading>
     </section>
@@ -33,6 +43,7 @@
 <script>
 // components
 import LineChart from '~/components/charts/line'
+import InfoCard from '~/components/cards/vertical'
 // libs
 import TrelloParser from '~/libs/trelloParser'
 const trelloParser = new TrelloParser()
@@ -47,7 +58,10 @@ export default {
     totalPoints: 0,
     pointsDoneByDay: [],
     isLoading: true,
-    graph: null
+    graph: null,
+    storeElements: {
+      
+    }
   }),
   /**
    * Ignite component
@@ -125,7 +139,8 @@ export default {
     }
   },
   components: {
-    LineChart
+    LineChart,
+    InfoCard
   }
 }
 </script>

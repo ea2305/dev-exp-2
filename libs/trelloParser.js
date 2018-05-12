@@ -1,8 +1,9 @@
 import moment from 'moment'
+import { join } from 'path';
 /**
  * Trello (Plugin Score) Parser from API 
  * @author Elihu A. Cruz
- * @version 0.1.1
+ * @version 0.1.2
  */
 
 class TrelloParser {
@@ -58,31 +59,17 @@ class TrelloParser {
    * @param {Object} scrumList : cards from trello
    */
   getBurndownChart ( scrumList ) {
-    let joinedList = []
-    let chart = []
-    let finalKey = ''
-    let labels = []
     let data = []
-
-    // iteration list scrum configuration
-    this.listLabels.forEach( list => {
-      joinedList = joinedList.concat(scrumList[list.key])
-      if (list.final)
-        finalKey = list.key // done table
-    })
-
+    let labels = []
+    let finalKey = this.getFinalLabel()
+    let joinedList = this.joinTrelloList(scrumList)
+    console.log(finalKey, 'FINAL KEY')
     // get total points
     let totalPoints = joinedList.reduce((prev, card) => (prev + card.estimated), 0)
+
     // group by date and reduce total by day to chart
-    let grouped = {}
-    scrumList[finalKey].forEach(task => {
-      let date = moment(task.date).format('YYYY-MM-DD')
-      if (grouped[date] === undefined) {
-        grouped[date] = [task]
-      } else {
-        grouped[date].push(task)
-      }
-    })
+    let grouped = this.groupListByDate(scrumList[finalKey])
+    
     // Get points by date and burndown points by date
     let currenPoints = totalPoints
     labels.push('Start')
@@ -111,6 +98,48 @@ class TrelloParser {
         }
       ]
     }
+  }
+  /**
+   * Extract cards grouped last date of activity
+   * @param {Array} list : Trello List with cards
+   */
+  groupListByDate (list) {
+    // group by date and reduce total by day to chart
+    let grouped = {}
+    // iteration process
+    list.forEach(task => {
+      // get generic date
+      let date = moment(task.date).format('YYYY-MM-DD')
+      // create or insert
+      if (grouped[date] === undefined)
+        grouped[date] = [task]
+      else
+        grouped[date].push(task)
+    })
+    return grouped
+  }
+  /**
+   * Get label with final state (DONE)
+   */
+  getFinalLabel () {
+    let position = this.listLabels.filter(label => label.final === true)  
+    console.log(position, 'asljdñfljañldsfjñadsjfñlk')
+    return (position.length > 0) ? position.pop().key : -1
+  }
+  /**
+   * Get full list elements
+   * @param {Object} scrumList : List object container
+   * @returns {Array} Concat elements
+   */
+  joinTrelloList (scrumList) {
+    // base container
+    let joinedList = []
+
+    // iteration list scrum configuration
+    this.listLabels.forEach(list => {
+      joinedList = joinedList.concat(scrumList[list.key])
+    })
+    return joinedList
   }
   /**
    * Validation of title with score
@@ -160,7 +189,6 @@ class TrelloParser {
     }
     return (values.length > 0) ? parseFloat(values.shift()) : 0
   }
-
 }
 
 export default TrelloParser
