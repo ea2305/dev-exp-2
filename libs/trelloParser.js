@@ -61,6 +61,8 @@ class TrelloParser {
     let joinedList = []
     let chart = []
     let finalKey = ''
+    let labels = []
+    let data = []
 
     // iteration list scrum configuration
     this.listLabels.forEach( list => {
@@ -88,16 +90,41 @@ class TrelloParser {
       if (grouped.hasOwnProperty(key)) {
         const element = grouped[key];
         let points = element.reduce((prev, task) => ( prev + task.estimated), 0)
+        // label chart
+        labels.push(key)
+        // data burndown
+        data.push((currenPoints - points))
+        /**
         chart.push({
           date: key,
           estimated: points,
           total: totalPoints,
           burndown: (currenPoints - points)
         })
+        */
         currenPoints -= points
       }
     }
-    return chart
+    /**
+      labels: ['January', 'February'],
+      datasets: [
+        {
+          label: 'GitHub Commits',
+          backgroundColor: '#f87979',
+          data: [40, 20]
+        }
+      ]
+     */
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'Sprint Activity',
+          backgroundColor: '#11bed3',
+          data
+        }
+      ]
+    }
   }
   /**
    * Validation of title with score

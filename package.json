@@ -9,11 +9,13 @@
     "@nuxtjs/dotenv": "1.1.1",
     "@nuxtjs/pwa": "latest",
     "@rafamaciel/firebase": "1.0.0",
+    "chart.js": "2.7.2",
     "firebase": "4.13.1",
     "indicative": "5.0.5",
     "moment": "2.22.1",
     "nuxt": "latest",
-    "nuxt-buefy": "0.0.4"
+    "nuxt-buefy": "0.0.4",
+    "vue-chartjs": "3.3.1"
   },
   "scripts": {
     "dev": "nuxt",

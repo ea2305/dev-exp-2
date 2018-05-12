@@ -3,21 +3,16 @@
     <section class="container">
       <div class="columns is-multiline">
         <div class="column is-12">
-          <h2>About Sprint</h2>
-          {{ lists }}
-          <br>
-          <p>to do</p>
-          {{ toDo }}
-          <br>
-          <p> to Fix</p>
-          {{ toFix }}
-          <br>
-          <p>Doing</p>
-          {{ doing }}
-          <br>
-          <p>Done</p>
-          {{ done }}
-          
+          <h2 class="is-size-3">Sprint: Burndown chart</h2>
+        </div>
+        <div class="column is-12">
+          <div class="is-flex" style="justify-content: center;">
+            <line-chart v-if="graph !== null" 
+              :data="graph" 
+              :options="{responsive: false, maintainAspectRatio: false}"
+              :width="600"
+              :height="350"/>
+          </div>
         </div>
       </div>
     </section>
@@ -25,9 +20,12 @@
 </template>
 
 <script>
+// components
+import LineChart from '~/components/charts/line'
 // libs
 import TrelloParser from '~/libs/trelloParser'
 const trelloParser = new TrelloParser()
+
 export default {
   data: () => ({
     lists: [],
@@ -37,7 +35,8 @@ export default {
     toFix: [],
     totalPoints: 0,
     pointsDoneByDay: [],
-    isLoading: true
+    isLoading: true,
+    graph: null
   }),
   /**
    * Ignite component
@@ -94,7 +93,7 @@ export default {
             this[list.key] = trelloParser.getPointsFromList(cards.data)
           }
           if (index === this.lists.length - 1) {
-            trelloParser.getBurndownChart({
+            this.graph =trelloParser.getBurndownChart({
               toDo: this.toDo,
               toFix: this.toFix,
               done: this.done,
@@ -106,6 +105,9 @@ export default {
         }
       })
     }
+  },
+  components: {
+    LineChart
   }
 }
 </script>
