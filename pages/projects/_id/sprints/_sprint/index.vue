@@ -7,14 +7,25 @@
         </div>
         <div class="column is-12">
           <div class="is-flex" style="justify-content: center;">
-            <line-chart v-if="graph !== null" 
+            <line-chart v-if="!isLoading" 
               :data="graph" 
-              :options="{responsive: false, maintainAspectRatio: false}"
+              :options="{
+                responsive: false, maintainAspectRatio: false,
+                scales: {
+                  yAxes: [{
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }]
+                }
+              }"
               :width="600"
               :height="350"/>
           </div>
         </div>
       </div>
+      <!--loader-->
+      <b-loading :is-full-page="true" :active.sync="isLoading" :canCancel="false"></b-loading>
     </section>
   </div>
 </template>
@@ -88,17 +99,24 @@ export default {
           let cards = await this.$axios.get(`https://api.trello.com/1/lists/${list.listId}/cards?key=${process.env.TRELLO_API_KEY}&token=${process.env.TRELLO_TOKEN}`)
           
           if (cards.status === 200) {
-            console.log(list.key, 'KEYª')
             // set card on data store
             this[list.key] = trelloParser.getPointsFromList(cards.data)
-          }
-          if (index === this.lists.length - 1) {
-            this.graph =trelloParser.getBurndownChart({
-              toDo: this.toDo,
-              toFix: this.toFix,
-              done: this.done,
-              doing: this.doing
-            })
+            if (index === this.lists.length - 1) {
+              this.graph = trelloParser.getBurndownChart({
+                toDo: this.toDo,
+                toFix: this.toFix,
+                done: this.done,
+                doing: this.doing
+              })
+              this.isLoading = false
+              // notify
+              this.$toast.open({
+                duration: 3000,
+                message: 'Loaded',
+                position: 'is-bottom',
+                type: 'is-success'
+              })
+            }
           }
         } catch (error) {
           console.log(error)

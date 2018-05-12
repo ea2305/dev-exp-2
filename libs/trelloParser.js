@@ -73,7 +73,6 @@ class TrelloParser {
 
     // get total points
     let totalPoints = joinedList.reduce((prev, card) => (prev + card.estimated), 0)
-    
     // group by date and reduce total by day to chart
     let grouped = {}
     scrumList[finalKey].forEach(task => {
@@ -86,6 +85,9 @@ class TrelloParser {
     })
     // Get points by date and burndown points by date
     let currenPoints = totalPoints
+    labels.push('Start')
+    // data burndown
+    data.push(currenPoints)
     for (const key in grouped) {
       if (grouped.hasOwnProperty(key)) {
         const element = grouped[key];
@@ -94,27 +96,11 @@ class TrelloParser {
         labels.push(key)
         // data burndown
         data.push((currenPoints - points))
-        /**
-        chart.push({
-          date: key,
-          estimated: points,
-          total: totalPoints,
-          burndown: (currenPoints - points)
-        })
-        */
+        // update points
         currenPoints -= points
       }
     }
-    /**
-      labels: ['January', 'February'],
-      datasets: [
-        {
-          label: 'GitHub Commits',
-          backgroundColor: '#f87979',
-          data: [40, 20]
-        }
-      ]
-     */
+    // data graph structure
     return {
       labels,
       datasets: [

@@ -1,10 +1,20 @@
 <script>
 // libs
-import { Line } from 'vue-chartjs'
+import { Line, mixins} from 'vue-chartjs'
+const { reactiveProp } = mixins
+
 export default {
   extends: Line,
-  props: ['data', 'options'],
-  mounted () {
+  mixins: [reactiveProp],
+  props: {
+    data: {
+      required: true
+    },
+    options: {
+      required: true
+    }
+  },
+  async mounted () {
     this.renderChart(this.data, this.options)
   }
 }
