@@ -81,7 +81,7 @@ export default {
      * Return values of card in list with value assigned by scrum for trello plugin
      */
     async getScoreList () {
-      this.lists.forEach(async list => {
+      this.lists.forEach(async (list, index) => {
         // https://api.trello.com/1/lists/<boardId>/cards??key=<trello_key>&token=<trello_token>
         // get trello id
         const trelloId = this.$route.params.sprint
@@ -89,8 +89,17 @@ export default {
           let cards = await this.$axios.get(`https://api.trello.com/1/lists/${list.listId}/cards?key=${process.env.TRELLO_API_KEY}&token=${process.env.TRELLO_TOKEN}`)
           
           if (cards.status === 200) {
+            console.log(list.key, 'KEYª')
             // set card on data store
             this[list.key] = trelloParser.getPointsFromList(cards.data)
+          }
+          if (index === this.lists.length - 1) {
+            trelloParser.getBurndownChart({
+              toDo: this.toDo,
+              toFix: this.toFix,
+              done: this.done,
+              doing: this.doing
+            })
           }
         } catch (error) {
           console.log(error)
