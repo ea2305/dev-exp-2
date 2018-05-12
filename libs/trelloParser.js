@@ -63,7 +63,6 @@ class TrelloParser {
     let labels = []
     let finalKey = this.getFinalLabel()
     let joinedList = this.joinTrelloList(scrumList)
-    console.log(finalKey, 'FINAL KEY')
     // get total points
     let totalPoints = joinedList.reduce((prev, card) => (prev + card.estimated), 0)
 
@@ -123,7 +122,6 @@ class TrelloParser {
    */
   getFinalLabel () {
     let position = this.listLabels.filter(label => label.final === true)  
-    console.log(position, 'asljdñfljañldsfjñadsjfñlk')
     return (position.length > 0) ? position.pop().key : -1
   }
   /**
