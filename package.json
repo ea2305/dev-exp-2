@@ -9,7 +9,7 @@
     "@nuxtjs/dotenv": "1.1.1",
     "@nuxtjs/pwa": "latest",
     "@rafamaciel/firebase": "1.0.0",
-    "chart.js": "2.7.2",
+    "chart.js": "2.9.4",
     "firebase": "4.13.1",
     "indicative": "5.0.5",
     "moment": "2.22.1",
